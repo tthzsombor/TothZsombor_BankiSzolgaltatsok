@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BankiSzolgaltatasok
 {
-    public class Tulajdonos
+    public sealed class Tulajdonos
     {
         private string nev;
 
