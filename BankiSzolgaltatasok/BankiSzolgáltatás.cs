@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 
 namespace BankiSzolgaltatasok
 {
-    internal class BankiSzolgáltatás
+    public abstract class BankiSzolgáltatás
     {
         private Tulajdonos tulajdonos;
-
-        public BankiSzolgaltatas( Tulajdonos tulajdonos)
+        public BankiSzolgáltatás( Tulajdonos tulajdonos)
         {
             this.tulajdonos = tulajdonos;
         }
@@ -21,11 +20,7 @@ namespace BankiSzolgaltatasok
         }
 
 
-        public override string ToString()
-        {
-            return $"Tulajdonos: {this.getTulajdonos().getNev()}";
-
-        }
+      
 
     }
 }

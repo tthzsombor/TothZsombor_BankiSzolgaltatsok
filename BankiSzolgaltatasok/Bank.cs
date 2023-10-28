@@ -19,44 +19,55 @@ namespace BankiSzolgaltatasok
 
         public Számla szamlanyitas(int hitelKeret, Tulajdonos tulajdonos)
         {
-            Számla szamlaHelyettesito;
-            if (hitelKeret == 0)
+            if (hitelKeret < 0)
             {
-                szamlaHelyettesito = new MegtakarításiSzámla(tulajdonos);
+                HitelSzámla h = new HitelSzámla(tulajdonos, hitelKeret);
+                szamlaLista.Add(h);
+                return h;
             }
             else
             {
-                szamlaHelyettesito = new HitelSzámla(tulajdonos, hitelKeret);
-                this.osszHitelKeret += hitelKeret;
+                MegtakarításiSzámla m_sz = new MegtakarításiSzámla(tulajdonos, hitelKeret);
+                szamlaLista.Add(m_sz);
+                return m_sz;
             }
-            this.szamlaLista.Add(szamlaHelyettesito);
-            return szamlaHelyettesito;
         }
 
         public int GetÖsszEgyenleg(Tulajdonos tulajdonos)
         {
-            int osszEgyenleg = 0;
-            for (int i = 0; i < this.szamlaLista.Count; ++i)
+            int ossz = 0;
+          
+
+            for (int i = 0; i <szamlaLista.Count ; i++)
             {
-                if (this.szamlaLista[i].getTulajdonos() == tulajdonos)
+                if (szamlaLista[i].getTulajdonos() == tulajdonos)
                 {
-                    osszEgyenleg += this.szamlaLista[i].AktualisEgyenleg();
+                    ossz += szamlaLista[i].getAktualisEgyenleg();
                 }
             }
-            return osszEgyenleg;
+            return ossz;
         }
 
         public Számla GetLegnagyobbEgyenlegűSzámla(Tulajdonos tulajdonos)
         {
-             Számla maxSzamla = new Számla(tulajdonos);
-            for (int i = 0; i < this.szamlaLista.Count; ++i)
+            Számla m_szamla = null;
+            for (int i = 0; i < szamlaLista.Count; i++)
             {
-                if (maxSzamla.getAktualisEgyenleg() < this.szamlaLista[i].getAktualisEgyenleg())
+                if (szamlaLista[i].getTulajdonos() == tulajdonos)
                 {
-                    maxSzamla.aktualisEgyenleg = this.szamlaLista[i].getAktualisEgyenleg();
+                    m_szamla = szamlaLista[i];
                 }
             }
-            return maxSzamla;
+
+            for (int i = 0; i < szamlaLista.Count; i++)
+            {
+                if (szamlaLista[i].getTulajdonos()==tulajdonos && szamlaLista[i].getAktualisEgyenleg()>m_szamla.getAktualisEgyenleg())
+                {
+                    m_szamla = szamlaLista[i];
+                }
+            }
+
+            return m_szamla;
         }
 
         public long ÖsszHitelkeret()
@@ -65,7 +76,7 @@ namespace BankiSzolgaltatasok
         }
 
 
-        //nem végleges
+        
     }
 }
 

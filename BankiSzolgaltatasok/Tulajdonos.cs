@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BankiSzolgaltatasok
 {
-    public sealed class Tulajdonos
+    public class Tulajdonos
     {
         private string nev;
 
@@ -20,9 +20,9 @@ namespace BankiSzolgaltatasok
             return this.nev;
         }
 
-        public void setNev(string nev)
+        public string setNev(string nev)
         {
-            this.nev = nev;
+            return this.nev = nev;
         }
     }
 }

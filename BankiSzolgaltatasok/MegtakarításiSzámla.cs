@@ -10,34 +10,44 @@ namespace BankiSzolgaltatasok
     {
 
         private double kamat;
-        private static double alapkamat;
+        private static double alapkamat = 1.1;
 
-        public double Kamat { get => kamat; set => kamat = value; }
-        public static double Alapkamat { get => alapkamat; set => alapkamat = 1.1; }
 
         public MegtakarításiSzámla(Tulajdonos tulajdonos, HitelSzámla hitelkeret) : base(tulajdonos)
         {
-            
+            this.kamat = alapkamat;
         }
 
-        public bool Kivesz(int osszeg)
+        public double getKamat()
         {
-            bool sikerult=false;
-            if(this.aktualisegyenleg-osszeg<=0)
+            return kamat;
+        }
+
+        public void setKamat(double kamat)
+        {
+            this.kamat = kamat;
+        }
+
+        public override bool Kivesz(int osszeg)
+        {
+            bool sikerult;
+            if (this.getAktualisEgyenleg() - osszeg <= 0)
             {
-                Console.WriteLine("Nem mehet az egyenleg 0 alá");
+                sikerult = false;
             }
             else
             {
-                aktualisegyenleg-=osszeg;
-                sikerult=true;
+                getAktualisEgyenleg() -= osszeg;
+                sikerult = true;
             }
             return sikerult;
         }
-
+    
         public void KamatJóváírás()
         {
-            this.aktualisegyenleg += (int)(this.aktualisegyenleg * (this.kamat / 100.0));
+            this.getAktualisEgyenleg() *= kamat;
         }
+
+      
     }
 }

@@ -13,14 +13,31 @@ namespace BankiSzolgaltatasok
 
         public Kártya(Tulajdonos tulajdonos, Számla szamla, string kartyaSzam) : base(tulajdonos)
         {
-            
+            tulajdonos=getTulajdonos();
             this.szamla = szamla;
             this.kartyaSzam = kartyaSzam;
         }
 
+
+        public string KartyaSzam()
+        {
+            return this.kartyaSzam;
+        }
+
+
         public bool Vasarlas(int osszeg)
         {
-            return true;
+            bool sikerult;
+            if(szamla.getAktualisEgyenleg()-osszeg<0)
+            {
+                sikerult = false;
+            }
+            else
+            {
+                szamla.Kivesz(osszeg);
+                sikerult=true;
+            }
+            return sikerult;
         }
     }
 }

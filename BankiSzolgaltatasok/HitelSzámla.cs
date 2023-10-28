@@ -15,16 +15,16 @@ namespace BankiSzolgaltatasok
             this.hitelkeret = hitelkeret;
         }
 
-        public bool Kivesz(int osszeg)
+        public override bool Kivesz(int osszeg)
         {
-            bool sikerult = true;
-            if(osszeg>hitelkeret)
+            bool sikerult;
+            if (osszeg > hitelkeret+getAktualisEgyenleg())
             {
-                sikerult= false;
+                sikerult = false;
             }
             else
             {
-                this.aktualisegyenleg -= osszeg;
+                getAktualisEgyenleg() -= osszeg;
                 sikerult = true;
             }
             return sikerult;

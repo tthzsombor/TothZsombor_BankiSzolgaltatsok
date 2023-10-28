@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BankiSzolgaltatasok
 {
-    internal class Számla : BankiSzolgáltatás
+    internal abstract class Számla : BankiSzolgáltatás
     {
 
         protected int aktualisegyenleg;
@@ -15,20 +15,22 @@ namespace BankiSzolgaltatasok
            
         }
 
+        public int getAktualisEgyenleg()
+        {
+            return this.aktualisegyenleg;
+        }
+
         public void Befizet(int osszeg)
         {
             this.aktualisegyenleg += osszeg;
         }
 
-        public bool Kivesz(int osszeg)
-        {
-            this.aktualisegyenleg -= osszeg;
-            return true;
-        }
+        public abstract bool Kivesz(int osszeg);
+      
 
         public Kártya ÚjKártya(string kartyaszam)
         {
-             Kártya k = new Kártya(this.getTulajdonos(), this, kartyaszam);
+            Kártya k = new Kártya(this.getTulajdonos(), this, kartyaszam);
             return k;
 
         }
