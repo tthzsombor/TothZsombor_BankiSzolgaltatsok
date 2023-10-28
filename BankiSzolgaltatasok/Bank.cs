@@ -63,6 +63,9 @@ namespace BankiSzolgaltatasok
         {
             return this.osszHitelKeret;
         }
+
+
+        //nem végleges
     }
 }
 
