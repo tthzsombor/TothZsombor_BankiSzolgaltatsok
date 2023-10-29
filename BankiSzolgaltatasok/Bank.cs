@@ -27,7 +27,7 @@ namespace BankiSzolgaltatasok
             }
             else
             {
-                MegtakarításiSzámla m_sz = new MegtakarításiSzámla(tulajdonos, hitelKeret);
+                MegtakarításiSzámla m_sz = new MegtakarításiSzámla(tulajdonos);
                 szamlaLista.Add(m_sz);
                 return m_sz;
             }
@@ -50,7 +50,7 @@ namespace BankiSzolgaltatasok
 
         public Számla GetLegnagyobbEgyenlegűSzámla(Tulajdonos tulajdonos)
         {
-            Számla m_szamla = null;
+            Számla m_szamla;
             for (int i = 0; i < szamlaLista.Count; i++)
             {
                 if (szamlaLista[i].getTulajdonos() == tulajdonos)

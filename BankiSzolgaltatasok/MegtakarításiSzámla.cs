@@ -13,7 +13,7 @@ namespace BankiSzolgaltatasok
         private static double alapkamat = 1.1;
 
 
-        public MegtakarításiSzámla(Tulajdonos tulajdonos, HitelSzámla hitelkeret) : base(tulajdonos)
+        public MegtakarításiSzámla(Tulajdonos tulajdonos) : base(tulajdonos)
         {
             this.kamat = alapkamat;
         }
@@ -37,7 +37,7 @@ namespace BankiSzolgaltatasok
             }
             else
             {
-                getAktualisEgyenleg() -= osszeg;
+                getAktualisEgyenleg()-=osszeg;
                 sikerult = true;
             }
             return sikerult;
@@ -45,7 +45,7 @@ namespace BankiSzolgaltatasok
     
         public void KamatJóváírás()
         {
-            this.getAktualisEgyenleg() *= kamat;
+            this.getAktualisEgyenleg() *=kamat;
         }
 
       
